@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIRECTOR MARKET — WORK</title>
-    <meta name="description" content="디렉터마켓 포트폴리오 창고입니다. 저희가 진행했던 작업물들을 확인해보세요.">
+    <title>DIRECTOR MARKET — WORKS</title>
+    <meta name="description" content="디렉터마켓 포트폴리오. 저희가 진행했던 작업물들을 확인해보세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,70 +13,199 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* WORK 페이지 전용 헤더 여백 (이미지가 덮이지 않도록) */
-        .work-hero {
-            padding-top: 150px;
-            padding-bottom: 80px;
+        /* =========================================
+           WORKS PAGE — Scattered Card Layout
+           ========================================= */
+
+        body {
+            overflow-x: hidden;
+            overscroll-behavior-y: none; /* Prevent rubber-banding at the bottom */
+            background-color: #000; /* Fallback if needed */
+        }
+
+                /* --- Works Hero Title --- */
+        .works-hero {
+            position: relative;
+            padding-top: 140px;
+            padding-bottom: 40px;
             text-align: center;
-            background-color: #000;
+            z-index: 2;
         }
 
-        .work-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
+        .works-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: clamp(16px, 2.66vw, 33px);
+            letter-spacing: clamp(6px, 1.5vw, 24px);
+            color: #ffffff;
+            text-transform: uppercase;
+            user-select: none;
+            text-indent: 12px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .works-title span {
+            display: inline-block;
+            animation: zero-gravity 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes zero-gravity {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(-3px, -8px) rotate(-3deg);
+            }
+            66% {
+                transform: translate(2px, 5px) rotate(2deg);
+            }
+            100% {
+                transform: translate(4px, -3px) rotate(-1deg);
+            }
+        }
+
+                                                /* --- Works Canvas Container --- */
+        .works-canvas {
+            position: relative;
+            width: 100%;
+            max-width: 1478px; /* Increased by 5% from 1408px */
             margin: 0 auto;
-            padding: 0 5%;
+            padding: 40px 20px 100px; /* Reduced bottom padding since no scatter */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 20px;
+            /* z-index removed to avoid restrictive stacking context */
         }
 
-        .work-item {
-            background: #111;
+        /* --- Individual YouTube Card --- */
+        .youtube-card {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; /* 1280x720 ratio */
+            background-color: #1a1a1a;
             border-radius: 12px;
             overflow: hidden;
+            cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .youtube-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            transition: border-color 0.4s;
+        }
+
+        .youtube-card:hover {
+            z-index: 100;
+            --hover-scale: 1.05;
+            transform: scale(var(--hover-scale, 1.05));
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6),
+                        0 0 30px rgba(255, 255, 255, 0.05);
+        }
+
+        .youtube-card:hover::after {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .youtube-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            background: #111;
+        }
+
+        /* --- Footer Envelope Effect Requirements --- */
+        .envelope-container {
             position: relative;
-        }
-
-        .work-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-        }
-
-        .work-item-img-wrap {
+            /* NO z-index here! Must share global stacking context to wedge cards */
             width: 100%;
-            height: 250px;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-top: -450px; /* Pull envelope much higher so it's visible when item 30 starts emerging */
+            pointer-events: none;
         }
 
-        .work-item-img {
+        .envelope-image {
+            display: block;
+            position: relative;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+            max-width: 1600px;
+            height: auto;
+            z-index: 100; /* Front layer absolute highest to mask the items */
+            pointer-events: none; /* Let clicks pass through */
         }
 
-        .work-item:hover .work-item-img {
-            transform: scale(1.05);
+        .envelope-image-back {
+            display: block;
+            position: absolute;
+            bottom: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1600px;
+            height: auto;
+            z-index: 5; /* Back layer strictly behind the animated items */
+            pointer-events: none;
         }
 
-        .work-item-content {
-            padding: 30px;
+        /* 
+           Youtube cards 25-28 will have standard styles initially.
+           Javascript will handle their transform translate values to animate them 
+           from the envelope into their grid position. 
+        */
+
+        .overlap-layer-1 {
+            z-index: 1; /* Back layer (behind cards) */
         }
 
-        .work-item-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #fff;
+        .overlap-layer-2 {
+            z-index: 20; /* Front layer (in front of cards) */
         }
 
-        .work-item-desc {
-            font-size: 1rem;
-            color: #aaa;
-            line-height: 1.5;
+        /* --- Responsive --- */
+        @media (max-width: 1024px) {
+            .works-canvas {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns for tablet */
+            }
         }
 
-        /* nav-logo를 index.html 로 보냄 */
+        @media (max-width: 768px) {
+            .works-hero {
+                padding-top: 110px;
+                padding-bottom: 20px;
+            }
+            .works-canvas {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+                gap: 16px;
+                padding: 0 16px 60px;
+            }
+            .youtube-card:hover {
+                transform: scale(1.02);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .works-canvas {
+                grid-template-columns: 1fr; /* 1 column for mobile */
+                gap: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -89,73 +218,343 @@
                 <img src="img/logo_white.png" alt="Director Market Logo" class="nav-logo-img">
             </a>
             <div class="nav-links">
-                <a href="index.html#about" class="nav-link">ABOUT</a>
-                <a href="work.html" class="nav-link" style="color:#ffffff;">WORK</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="work.html" class="nav-link" style="color:#ffffff;">Works</a>
                 <a href="index.html#blog" class="nav-link">BLOG</a>
-                <a href="index.html#contact" class="nav-link">CONTACT</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <span class="nav-lang">한/영 전환</span>
             </div>
         </div>
     </nav>
 
-    <!-- Work Hero Section -->
-    <section class="work-hero" id="work-hero">
-        <h1 class="section-title" data-aos="fade-up">OUR WORKS</h1>
-        <p class="section-lead" data-aos="fade-up" data-aos-delay="100">우리가 만들어낸 크리에이티브 솔루션들입니다.</p>
+    <!-- Works Title -->
+            <section class="works-hero">
+        <h1 class="works-title">
+            <span style="animation-duration: 5s; animation-delay: 0s;">W</span>
+            <span style="animation-duration: 7s; animation-delay: 0.5s;">O</span>
+            <span style="animation-duration: 6s; animation-delay: 1.2s;">R</span>
+            <span style="animation-duration: 8s; animation-delay: 0.2s;">K</span>
+            <span style="animation-duration: 6.5s; animation-delay: 0.8s;">S</span>
+        </h1>
     </section>
 
-    <!-- Work Grid Section -->
-    <section class="section">
-        <div class="work-grid">
-            <!-- Sample Portfolio Item 1 -->
-            <div class="work-item" data-aos="fade-up" data-aos-delay="200">
-                <div class="work-item-img-wrap">
-                    <img src="img/idea-planet.jpeg" alt="Work 1" class="work-item-img">
-                </div>
-                <div class="work-item-content">
-                    <h3 class="work-item-title">Project Alpha</h3>
-                    <p class="work-item-desc">Brand Strategy & Identity Design for a global fintech company.</p>
-                </div>
-            </div>
-            <!-- Sample Portfolio Item 2 -->
-            <div class="work-item" data-aos="fade-up" data-aos-delay="300">
-                <div class="work-item-img-wrap">
-                    <img src="img/kv-alt.jpeg" alt="Work 2" class="work-item-img">
-                </div>
-                <div class="work-item-content">
-                    <h3 class="work-item-title">Project Beta</h3>
-                    <p class="work-item-desc">Integrated Campaign & Digital Experience for a major sports brand.</p>
-                </div>
-            </div>
-            <!-- Sample Portfolio Item 3 -->
-            <div class="work-item" data-aos="fade-up" data-aos-delay="400">
-                <div class="work-item-img-wrap">
-                    <img src="img/hero-bg.jpg" alt="Work 3" class="work-item-img">
-                </div>
-                <div class="work-item-content">
-                    <h3 class="work-item-title">Project Gamma</h3>
-                    <p class="work-item-desc">Spatial Design and Interactive Media for a pop-up exhibition.</p>
-                </div>
-            </div>
-        </div>
+    <!-- 4x7 YouTube Link Grid -->
+    <section class="works-canvas" id="worksCanvas">
+        <!-- Item 1 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 1</div>
+        </a>
+        <!-- Item 2 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 2</div>
+        </a>
+        <!-- Item 3 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 3</div>
+        </a>
+        <!-- Item 4 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 4</div>
+        </a>
+        <!-- Item 5 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 5</div>
+        </a>
+        <!-- Item 6 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 6</div>
+        </a>
+        <!-- Item 7 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 7</div>
+        </a>
+        <!-- Item 8 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 8</div>
+        </a>
+        <!-- Item 9 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 9</div>
+        </a>
+        <!-- Item 10 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 10</div>
+        </a>
+        <!-- Item 11 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 11</div>
+        </a>
+        <!-- Item 12 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 12</div>
+        </a>
+        <!-- Item 13 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 13</div>
+        </a>
+        <!-- Item 14 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 14</div>
+        </a>
+        <!-- Item 15 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 15</div>
+        </a>
+        <!-- Item 16 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
+            <div class="youtube-placeholder">YouTube Link 16</div>
+        </a>
+        <!-- Item 17 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 17</div>
+        </a>
+        <!-- Item 18 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 18</div>
+        </a>
+        <!-- Item 19 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 19</div>
+        </a>
+        <!-- Item 20 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 20</div>
+        </a>
+        <!-- Item 21 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 21</div>
+        </a>
+        <!-- Item 22 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 22</div>
+        </a>
+        <!-- Item 23 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 23</div>
+        </a>
+        <!-- Item 24 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 24</div>
+        </a>
+
+        <!-- Item 25 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 25</div>
+        </a>
+        <!-- Item 26 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 26</div>
+        </a>
+        <!-- Item 27 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 27</div>
+        </a>
+        <!-- Item 28 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+            <div class="youtube-placeholder">YouTube Link 28</div>
+        </a>
+
+        <!-- Item 29 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card item-scattered">
+            <div class="youtube-placeholder">YouTube Link 29</div>
+        </a>
+        <!-- Item 30 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card item-scattered">
+            <div class="youtube-placeholder">YouTube Link 30</div>
+        </a>
+        <!-- Item 31 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card item-scattered">
+            <div class="youtube-placeholder">YouTube Link 31</div>
+        </a>
+        <!-- Item 32 -->
+        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card item-scattered">
+            <div class="youtube-placeholder">YouTube Link 32</div>
+        </a>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="footer" style="margin-top: 100px;">
-        <div class="footer-earth">
-            <img src="img/footer-bg.png" alt="Earth" class="footer-earth-img">
-        </div>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <span class="footer-dm">DM</span>
-                <span class="footer-brand">DIRECTOR<br>MARKET</span>
-            </div>
-            <div class="footer-info">
-                <p>© 2024 DIRECTOR MARKET. ALL RIGHTS RESERVED.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Torn Envelope Effect Footer -->
+    <div class="envelope-container" id="envelopeContainer">
+        <img src="img/footer_custom_image_back.png" alt="Footer Envelope Back" class="envelope-image-back">
+        <img src="img/footer_custom_image.png" alt="Footer Envelope" class="envelope-image">
+    </div>
+
+    <!-- Hidden original footer structure for reference if needed -->
+    <footer class="footer" id="footer" style="display: none;"></footer>
 
     <script src="app.js"></script>
+    <script>
+        /* =========================================
+           WORKS PAGE — Envelope Interactions
+           ========================================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedCards = document.querySelectorAll('.animated-card');
+            const envelopeContainer = document.getElementById('envelopeContainer');
+            
+            // Wait for envelope image to load to get accurate dimensions
+            const envelopeImg = envelopeContainer.querySelector('.envelope-image');
+            
+            const updatePositions = () => {
+                const envelopeRect = envelopeContainer.getBoundingClientRect();
+                const envelopeCenterY = envelopeRect.top + envelopeRect.height * 0.6; // Approximate "inside" of envelope height
+                const envelopeCenterX = envelopeRect.left + envelopeRect.width / 2;
+                
+                // Calculate destination offsets to sink into the envelope
+                animatedCards.forEach((card, index) => {
+                    const cardRect = card.getBoundingClientRect();
+                    const cardCenterX = cardRect.left + cardRect.width / 2;
+                    const cardCenterY = cardRect.top + cardRect.height / 2;
+                    
+                    // We want the card to travel from its original grid position (0,0 offset)
+                    // down to the envelope center. Which means when scrolled up, it's offset by:
+                    const dx = envelopeCenterX - cardCenterX;
+                    const dy = envelopeCenterY - cardCenterY;
+                    
+                    // Give diverse rotations to the 16 animated cards (17-32)
+                    // The last 4 (29-32) have much wilder starting rotations
+                    const rotations = [
+                        -25, 10, -5, 15, -18, 5, -10, 20, 
+                        -8, 12, -22, 18, -35, 45, -50, 60
+                    ];
+                    const dr = rotations[index] || 0;
+
+                    card.dataset.dx = dx;
+                    card.dataset.dy = dy;
+                    card.dataset.dr = dr;
+                });
+            };
+
+            // Call to initialize and set initial "0 scroll" state instantly
+            setTimeout(() => {
+                updatePositions();
+                window.dispatchEvent(new Event('scroll')); // trigger scroll to apply initial transforms
+            }, 100);
+            window.addEventListener('resize', updatePositions);
+
+            let targetScrollY = window.scrollY || 0;
+            window.addEventListener('scroll', () => {
+                targetScrollY = window.scrollY;
+            });
+
+            // Run a continuous animation loop so cards can float even when scroll stops
+            const render = (time) => {
+                const maxDistance = document.body.scrollHeight - window.innerHeight; 
+                
+                // We map the animation progress across the ENTIRE scrollable height of the page
+                let globalProgress = targetScrollY / (maxDistance || 1);
+                globalProgress = Math.max(0, Math.min(1, globalProgress));
+
+                    animatedCards.forEach((card, index) => {
+                        // 4 items per row, calculate which row (0 to 3)
+                        const rowIndex = Math.floor(index / 4);
+                        const isScatteredRow = index >= 28; // Items 29-32 (indices 28, 29, 30, 31)
+                        
+                        // Each card gets its OWN staggered timing based on individual index
+                        // so they appear ONE BY ONE as the user scrolls
+                        let start, end;
+                        if (isScatteredRow) {
+                            // Items 29-32: wider stagger gaps to prevent overlapping
+                            const scatteredIndex = index - 28; // 0,1,2,3
+                            // Items 31-32 (scatteredIndex 2,3) start even later so envelope is fully visible first
+                            start = 0.40 + scatteredIndex * 0.15; // 29:0.40, 30:0.55, 31:0.70, 32:0.85
+                            end = start + 0.30;
+                        } else {
+                            start = index * 0.05;
+                            end = start + 0.35;
+                        }
+                        
+                        let localProgress = (globalProgress - start) / (end - start);
+                        localProgress = Math.max(0, Math.min(1, localProgress));
+
+                        // Need to invert progress logic because our CSS transformations are calculated 
+                        // relative to the final position (where we want progress=1).
+                        let easeProgress = 1 - Math.pow(1 - localProgress, 3);
+                        
+                        const dx = parseFloat(card.dataset.dx);
+                        const dy = parseFloat(card.dataset.dy);
+                        const dr = parseFloat(card.dataset.dr);
+
+                        // Calculate linear trajectory offsets
+                        
+                        // Items 17-28: zig-zag from envelope. Alternate left/right starting offset.
+                        // Items 29-32: strictly vertical (no zig-zag), emerging from behind envelope front.
+                        const zigzagDirection = (index % 2 === 0) ? -1 : 1;
+                        const zigzagX = isScatteredRow ? 0 : zigzagDirection * 120 * (1 - easeProgress);
+
+                        // For 29-32: NO horizontal movement, purely vertical rise.
+                        let xProgress;
+                        if (isScatteredRow) {
+                            xProgress = 0; // Pure vertical rise for 29, 30, 31, 32
+                        } else {
+                            xProgress = 1;
+                        }
+                        let currentX = dx * (1 - easeProgress) * xProgress + zigzagX;
+                        let currentY = dy * (1 - easeProgress);
+                        let currentR = dr * (1 - easeProgress);
+                        
+                        const indexOffset = index * 1.5;
+                        const bloomFactor = Math.pow(localProgress, 3); 
+                        
+                        // Gentle vertical wobble for zero-gravity feel (same for all cards)
+                        const spreadYBase = ((index % 3) - 1.0);
+                        const spreadY = spreadYBase * 200 * bloomFactor;
+                        
+                        const floatOffsetX = 0; // Zig-zag is handled above via zigzagX
+                        const floatOffsetY = (spreadY + Math.cos(localProgress * Math.PI * 2 + indexOffset) * 150) * (1 - easeProgress);
+                        const floatOffsetR = Math.sin(localProgress * Math.PI * 2.5 + indexOffset) * 90 * (1 - easeProgress) * bloomFactor; 
+                        
+                        // Extra crooked final placement for items 29-32 if they have the specific class
+                        let continuousFloatX = 0;
+                        let continuousFloatY = 0;
+                        let continuousFloatR = 0;
+
+                        if (card.classList.contains('item-scattered')) {
+                            // --- Continuous Floating while emerging ---
+                            // They bob around using the continuous time variable
+                            // Multiplied by (1 - easeProgress) so they smoothly stop and align into the perfect grid
+                            const floatSpeed = 0.0015;
+                            continuousFloatX = Math.sin(time * floatSpeed + indexOffset) * 15 * (1 - easeProgress);
+                            continuousFloatY = Math.cos(time * floatSpeed * 0.8 + indexOffset) * 20 * (1 - easeProgress);
+                            continuousFloatR = Math.sin(time * floatSpeed * 0.5 + indexOffset) * 5 * (1 - easeProgress);
+                        }
+                        
+                        currentX += floatOffsetX + continuousFloatX;
+                        currentY += floatOffsetY + continuousFloatY;
+                        currentR += floatOffsetR + continuousFloatR;
+
+                        // Scale slightly down when inside envelope, wobbling slightly
+                        let scale = 1 - (0.3 * (1 - easeProgress));
+                        // Add a tiny pulsating scale effect while floating
+                        scale += Math.sin(localProgress * Math.PI * 3 + index) * 0.05 * (1 - easeProgress);
+
+                        // Opacity transition slightly
+                        // Items 31-32 (indices 30,31): NO opacity effect, always fully visible
+                        const opacity = (index === 30 || index === 31) ? 1 : 0.5 + (0.5 * easeProgress);
+
+                        // Use a CSS variable `var(--s, 1)` fallback to allow hover effects to compound or override
+                        card.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${currentR}deg) scale(calc(${scale} * var(--hover-scale, 1)))`;
+                        card.style.opacity = opacity;
+                        
+                        // No clip-path on any cards — all grids must stay fully visible as complete rectangles.
+                        card.style.clipPath = 'none';
+                        
+                        // Items 29-32: while emerging, z-index 20 (BETWEEN envelope back 5 and front 100)
+                        // so they appear from behind the torn envelope front.
+                        // Once settled (easeProgress > 0.9), z-index 110 (ABOVE EVERYTHING)
+                        // so they display normally and are clickable.
+                        if (isScatteredRow) {
+                            card.style.zIndex = easeProgress > 0.9 ? 110 : 20;
+                        } else {
+                            card.style.zIndex = easeProgress > 0.9 ? 10 : 40;
+                        }
+                    });
+                    
+                    requestAnimationFrame(render);
+            };
+
+            // Start the continuous loop
+            requestAnimationFrame(render);
+        });
+    </script>
 </body>
 
 </html>
