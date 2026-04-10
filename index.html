@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 
 <body>
@@ -20,14 +20,14 @@
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav-inner">
-            <a href="#" class="nav-logo">
+            <a href="index.html" class="nav-logo">
                 <img src="img/logo_white.png" alt="Director Market Logo" class="nav-logo-img">
             </a>
             <div class="nav-links">
-                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="index.html#hero" class="nav-link active">ABOUT</a>
                 <a href="work.html" class="nav-link">WORK</a>
-                <a href="#blog" class="nav-link">BLOG</a>
-                <a href="#contact" class="nav-link">CONTACT</a>
+                <a href="index.html#blog" class="nav-link">BLOG</a>
+                <a href="contact.html" class="nav-link cta-link">CONTACT</a>
             </div>
         </div>
     </nav>
@@ -37,7 +37,7 @@
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-bg">
-            <img src="img/hero-bg.jpg" alt="Director Market KV" class="hero-img">
+            <img src="img/hero-bg.png" alt="Director Market KV" class="hero-img">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-scroll-indicator">
@@ -104,35 +104,6 @@
         </div>
     </section>
 
-    <!-- CLIENTS Section -->
-    <section class="section section-clients" id="clients">
-        <div class="clients-container">
-            <h2 class="section-title" data-aos="fade-up">OUR CLIENTS</h2>
-            <div class="clients-grid" data-aos="fade-up" data-aos-delay="200">
-                <div class="client-logo"><span>unicef</span></div>
-                <div class="client-logo"><span>HANCOM</span></div>
-                <div class="client-logo"><span>신한카드</span></div>
-                <div class="client-logo"><span>네이버</span></div>
-                <div class="client-logo"><span>대웅</span></div>
-                <div class="client-logo"><span>SAMSUNG</span></div>
-                <div class="client-logo"><span>I·SEOUL·U</span></div>
-                <div class="client-logo"><span>HYUNDAI<br><small>MOTOR GROUP</small></span></div>
-                <div class="client-logo"><span>LANEIGE</span></div>
-                <div class="client-logo"><span>ASIANA AIRLINES</span></div>
-                <div class="client-logo"><span>Coca-Cola</span></div>
-                <div class="client-logo"><span>CGV</span></div>
-                <div class="client-logo"><span>인천광역시</span></div>
-                <div class="client-logo"><span>kobaco</span></div>
-                <div class="client-logo"><span>KB Kookmin Card</span></div>
-                <div class="client-logo"><span>kt</span></div>
-                <div class="client-logo"><span>wavve</span></div>
-                <div class="client-logo"><span>AHC</span></div>
-                <div class="client-logo"><span>☆</span></div>
-                <div class="client-logo"><span>SK telecom</span></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section class="section section-contact" id="contact">
         <div class="contact-container" data-aos="fade-up">
@@ -148,21 +119,48 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="footer">
-        <div class="footer-earth">
-            <img src="img/footer-bg.png" alt="Earth" class="footer-earth-img">
-        </div>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <span class="footer-dm">DM</span>
-                <span class="footer-brand">DIRECTOR<br>MARKET</span>
+    <!-- CLIENTS Section -->
+    <section class="section section-clients" id="clients">
+        <div class="clients-container">
+            <h2 class="section-title" data-aos="fade-up">CLIENTS</h2>
+            <div class="clients-floating-wrap">
+                <!-- Row 1 -->
+                <div class="client-logo-float logo-unicef" data-parallax="0.1"><img src="img/clients/UNICEF_Logo.png" alt="unicef"></div>
+                <div class="client-logo-float logo-hancom" data-parallax="0.15"><img src="img/clients/한콤.png" alt="HANCOM"></div>
+                <div class="client-logo-float logo-shinhan" data-parallax="0.08"><img src="img/clients/신한카드.png" alt="신한카드"></div>
+                <div class="client-logo-float logo-placeholder" data-parallax="0.12" style="visibility: hidden;"><img src="img/clients/삼성.png" alt=""></div>
+                <div class="client-logo-float logo-siheung" data-parallax="0.13"><img src="img/clients/시흥로고.png" alt="시흥"></div>
+
+                <!-- Row 2 -->
+                <div class="client-logo-float logo-samsung" data-parallax="0.12"><img src="img/clients/삼성.png" alt="SAMSUNG"></div>
+                <div class="client-logo-float logo-iseoulu" data-parallax="0.1"><img src="img/clients/img.png" alt="I SEOUL U"></div>
+                <div class="client-logo-float logo-hyundai" data-parallax="0.2"><img src="img/clients/Hyundai_Motor_Group_CI.svg.png" alt="HYUNDAI"></div>
+                <div class="client-logo-float logo-laneige" data-parallax="0.05"><img src="img/clients/라네즈 로고.png" alt="LANEIGE"></div>
+                <div class="client-logo-float logo-asiana" data-parallax="0.18"><img src="img/clients/Asiana_Airlines-Logo_New.svg.png" alt="ASIANA AIRLINES"></div>
+
+                <!-- Row 3 -->
+                <div class="client-logo-float logo-cocacola" data-parallax="0.1"><img src="img/clients/Coca-Cola_logo.svg.png" alt="Coca-Cola"></div>
+                <div class="client-logo-float logo-cgv" data-parallax="0.14"><img src="img/clients/CGV.png" alt="CGV"></div>
+                <div class="client-logo-float logo-incheon" data-parallax="0.15"><img src="img/clients/img-1.png" alt="인천"></div>
+                <div class="client-logo-float logo-kobaco" data-parallax="0.09"><img src="img/clients/vision_3.png" alt="kobaco"></div>
+                <div class="client-logo-float logo-kb" data-parallax="0.07"><img src="img/clients/KB국민.png" alt="KB Kookmin Card"></div>
+
+                <!-- Row 4 -->
+                <div class="client-logo-float logo-kt" data-parallax="0.11"><img src="img/clients/kt-ci.png" alt="kt"></div>
+                <div class="client-logo-float logo-lineagem" data-parallax="0.12"><img src="img/clients/리지니M_Title.png" alt="Lineage M"></div>
+                <div class="client-logo-float logo-ahc" data-parallax="0.1"><img src="img/clients/39037_76814_33.png" alt="AHC"></div>
+                <div class="client-logo-float logo-pyeongchang" data-parallax="0.15"><img src="img/clients/평창.png" alt="평창"></div>
+                <div class="client-logo-float logo-skt" data-parallax="0.16"><img src="img/clients/SK_Telecom_Logo.svg.png" alt="SK telecom"></div>
             </div>
-            <div class="footer-info">
-                <p>© 2024 DIRECTOR MARKET. ALL RIGHTS RESERVED.</p>
-            </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Bottom Visual Section -->
+    <section class="section section-bottom-visual">
+        <div class="bottom-visual-container">
+            <img src="img/earth-pack.png" alt="Earth Pack" class="bottom-visual-img" data-aos="fade-up">
+        </div>
+    </section>
 
     <script src="app.js"></script>
 </body>

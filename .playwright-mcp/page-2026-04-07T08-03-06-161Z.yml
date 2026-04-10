@@ -1,0 +1,102 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Director Market Logo" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Director Market Logo" [ref=e5]
+      - generic [ref=e6]:
+        - link "ABOUT" [ref=e7] [cursor=pointer]:
+          - /url: index.html#about
+        - link "WORK" [ref=e8] [cursor=pointer]:
+          - /url: work.html
+        - link "BLOG" [ref=e9] [cursor=pointer]:
+          - /url: index.html#blog
+        - link "CONTACT" [ref=e10] [cursor=pointer]:
+          - /url: contact.html
+  - heading "C O N T A C T" [level=1] [ref=e14]:
+    - generic [ref=e15]: C
+    - generic [ref=e16]: O
+    - generic [ref=e17]: "N"
+    - generic [ref=e18]: T
+    - generic [ref=e19]: A
+    - generic [ref=e20]: C
+    - generic [ref=e21]: T
+  - generic [ref=e23]:
+    - heading "PROJECT INQUIRY" [level=2] [ref=e24]
+    - paragraph [ref=e25]: 새로운 프로젝트에 대한 고민을 저희와 나누어보세요.
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]: 소속
+        - textbox "소속" [ref=e29]:
+          - /placeholder: 회사명 또는 단체명을 입력해주세요.
+      - generic [ref=e30]:
+        - generic [ref=e31]: 이름
+        - textbox "이름" [ref=e32]:
+          - /placeholder: 성함을 입력해주세요.
+      - generic [ref=e33]:
+        - generic [ref=e34]: 이메일
+        - textbox "이메일" [ref=e35]:
+          - /placeholder: 이메일 주소를 입력해주세요.
+      - generic [ref=e36]:
+        - generic [ref=e37]: 연락처
+        - generic [ref=e38]:
+          - textbox "010" [ref=e39]
+          - generic [ref=e40]: "-"
+          - textbox [ref=e41]
+          - generic [ref=e42]: "-"
+          - textbox [ref=e43]
+      - generic [ref=e44]:
+        - generic [ref=e45]: 프로젝트 내용
+        - textbox "프로젝트 내용" [ref=e46]:
+          - /placeholder: 프로젝트의 목적, 규모, 일정 등 상세 내용을 입력해주세요.
+      - generic [ref=e47]:
+        - generic [ref=e48] [cursor=pointer]:
+          - checkbox "개인정보 수집 및 이용 동의"
+          - text: 개인정보 수집 및 이용 동의
+        - link "디렉토리 보기" [ref=e50] [cursor=pointer]:
+          - /url: "#"
+      - generic [ref=e52]:
+        - generic [ref=e54]: 문의하기
+        - img [ref=e56]
+  - generic [ref=e63]:
+    - heading "지구 본사 찾아오는길" [level=2] [ref=e64]:
+      - text: 지구 본사
+      - text: 찾아오는길
+    - iframe [ref=e66]:
+      - generic [active] [ref=f4e1]:
+        - generic [ref=f4e3]:
+          - region "지도" [ref=f4e4]
+          - iframe [ref=f4e9]:
+            
+        - link "지도에서 열기(새 탭에서 열기)" [ref=f4e12] [cursor=pointer]:
+          - /url: undefined
+          - text: 지도에서 열기
+          - img [ref=f4e14]
+    - generic [ref=e67]:
+      - heading "ADDRESS" [level=3] [ref=e68]
+      - paragraph [ref=e69]: 서울특별시 성동구 성수일로 99, 509호 (성수동2가, 서울숲AK밸리)
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]: T.
+          - generic [ref=e73]: 02-1234-5678
+        - generic [ref=e74]:
+          - generic [ref=e75]: E.
+          - generic [ref=e76]: hello@directormarket.com
+  - contentinfo [ref=e77]:
+    - generic [ref=e78]:
+      - link "DM DIRECTOR MARKET" [ref=e79] [cursor=pointer]:
+        - /url: index.html
+        - generic [ref=e80]: DM
+        - generic [ref=e81]:
+          - generic [ref=e82]: DIRECTOR
+          - generic [ref=e83]: MARKET
+      - navigation [ref=e84]:
+        - link "ABOUT" [ref=e85] [cursor=pointer]:
+          - /url: index.html#about
+        - link "WORK" [ref=e86] [cursor=pointer]:
+          - /url: work.html
+        - link "BLOG" [ref=e87] [cursor=pointer]:
+          - /url: index.html#blog
+        - link "CONTACT" [ref=e88] [cursor=pointer]:
+          - /url: contact.html
+    - paragraph [ref=e90]: © 2024 DIRECTOR MARKET. All rights reserved.
