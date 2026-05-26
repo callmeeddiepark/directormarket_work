@@ -701,8 +701,8 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200px;
-    height: 100px;
+    width: 230px;
+    height: 115px;
     opacity: 0;
     transform: translateY(80px) scale(0.8);
     transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
@@ -737,8 +737,8 @@ img {
 }
 
 .client-logo-float img {
-    max-width: 180px;
-    max-height: 90px;
+    max-width: 207px;
+    max-height: 104px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
     opacity: 0.75;
