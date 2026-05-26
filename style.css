@@ -737,23 +737,12 @@ img {
 }
 
 .client-logo-float img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    max-width: 207px;
+    max-height: 104px;
     object-fit: contain;
-    transition: opacity 0.4s ease, filter 0.4s ease;
-}
-
-.client-logo-float .logo-bw {
     filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
     opacity: 0.75;
-}
-
-.client-logo-float .logo-color {
-    opacity: 0;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.35));
-    pointer-events: none;
+    transition: all 0.4s ease;
 }
 
 .inquiry-planet img {
@@ -779,11 +768,8 @@ img {
 
 
 
-.client-logo-float:hover .logo-bw {
-    opacity: 0;
-}
-
-.client-logo-float:hover .logo-color {
+.client-logo-float:hover img {
+    filter: grayscale(0) brightness(1);
     opacity: 1;
 }
 
