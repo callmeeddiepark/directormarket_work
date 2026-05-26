@@ -980,10 +980,9 @@ img {
     max-width: 100%;
     margin: 0 auto;
     text-align: center;
-    /* Ensure old browsers clip correctly, stopping scroll height expansion */
     overflow: hidden;
-
-    height: 31vw;
+    /* Match new earth-pack image aspect ratio (1280/733 ≈ 1.746) */
+    height: calc(100vw / 1.746);
     margin-bottom: 0;
 
     will-change: transform;
