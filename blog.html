@@ -245,7 +245,7 @@
         </h1>
     </section>
 
-    <!-- Blog Card Grid -->
+    <!-- 4x7 YouTube Link Grid -->
     <section class="works-canvas" id="worksCanvas">
         <!-- Item 1 -->
         <a href="https://youtube.com" target="_blank" class="youtube-card">
@@ -312,32 +312,32 @@
             <div class="youtube-placeholder">Blog Post 16</div>
         </a>
         <!-- Item 17 -->
-        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
             <div class="youtube-placeholder">Blog Post 17</div>
         </a>
         <!-- Item 18 -->
-        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
             <div class="youtube-placeholder">Blog Post 18</div>
         </a>
         <!-- Item 19 -->
-        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
             <div class="youtube-placeholder">Blog Post 19</div>
         </a>
         <!-- Item 20 -->
-        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
             <div class="youtube-placeholder">Blog Post 20</div>
         </a>
         <!-- Item 21 -->
-        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
             <div class="youtube-placeholder">Blog Post 21</div>
         </a>
         <!-- Item 22 -->
-        <a href="https://youtube.com" target="_blank" class="youtube-card animated-card">
+        <a href="https://youtube.com" target="_blank" class="youtube-card">
             <div class="youtube-placeholder">Blog Post 22</div>
         </a>
     </section>
 
-    <!-- Torn Envelope Effect Footer -->
+    <!-- Torn Envelope Footer (static display only) -->
     <div class="envelope-container" id="envelopeContainer">
         <img src="img/footer_custom_image_back.png" alt="Footer Envelope Back" class="envelope-image-back">
         <img src="img/footer_custom_image.png" alt="Footer Envelope" class="envelope-image">
@@ -345,9 +345,8 @@
 
     <script src="app.js"></script>
     <script>
-        /* =========================================
-           WORKS PAGE — Envelope Interactions
-           ========================================= */
+        /* Scatter/scroll animation disabled — envelope is static display only. */
+        if (false) {
         document.addEventListener('DOMContentLoaded', () => {
             const animatedCards = document.querySelectorAll('.animated-card');
             const envelopeContainer = document.getElementById('envelopeContainer');
@@ -516,6 +515,7 @@
             // Start the continuous loop
             requestAnimationFrame(render);
         });
+        } // end if (false) — legacy block disabled
     </script>
 </body>
 
