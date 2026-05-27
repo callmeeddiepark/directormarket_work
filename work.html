@@ -338,14 +338,15 @@
         </a>
     </section>
 
+    <!-- Torn Envelope Footer (static display only) -->
+    <div class="envelope-container" id="envelopeContainer">
+        <img src="img/footer_custom_image_back.png" alt="Footer Envelope Back" class="envelope-image-back">
+        <img src="img/footer_custom_image.png" alt="Footer Envelope" class="envelope-image">
+    </div>
+
     <script src="app.js"></script>
     <script>
-        /* =========================================
-           WORKS PAGE — (envelope/scatter animation removed)
-           ========================================= */
-        /* The original envelope and scatter animation was removed.
-           If you need it back, restore the .envelope-container element
-           and the legacy animation block (kept in git history). */
+        /* Scatter/scroll animation disabled — envelope is static display only. */
         if (false) {
         document.addEventListener('DOMContentLoaded', () => {
             const animatedCards = document.querySelectorAll('.animated-card');
