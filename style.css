@@ -510,6 +510,15 @@ img {
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
 }
 
+/* Transparent PNG: skip rectangular shadow/radius, use drop-shadow filter so
+   the shadow follows the alpha outline instead of the image bounding box. */
+.ideas-pack-img {
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
+}
+
 .floating {
     animation: float 6s ease-in-out infinite;
 }
